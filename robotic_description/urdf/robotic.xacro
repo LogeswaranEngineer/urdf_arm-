@@ -1,0 +1,115 @@
+<?xml version="1.0" ?>
+<robot name="robotic" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find robotic_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find robotic_description)/urdf/robotic.trans" />
+<xacro:include filename="$(find robotic_description)/urdf/robotic.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="1.4475057750305068e-17 0.0 0.02" rpy="0 0 0"/>
+    <mass value="9.864600932271951"/>
+    <inertia ixx="0.025977" iyy="0.025977" izz="0.049323" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find robotic_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find robotic_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="second_link_1">
+  <inertial>
+    <origin xyz="0.0 0.0 0.03455777541352945" rpy="0 0 0"/>
+    <mass value="7.79164553605637"/>
+    <inertia ixx="0.014237" iyy="0.016126" izz="0.018773" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.0 -0.04" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find robotic_description)/meshes/second_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.0 -0.04" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find robotic_description)/meshes/second_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="third_link_1">
+  <inertial>
+    <origin xyz="-4.2904276158884305e-18 -6.198809819435604e-14 0.06999999999999995" rpy="0 0 0"/>
+    <mass value="4.160152581573786"/>
+    <inertia ixx="0.013069" iyy="0.012703" izz="0.002099" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.0 -0.13" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find robotic_description)/meshes/third_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.0 -0.13" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find robotic_description)/meshes/third_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="fourth_link_1">
+  <inertial>
+    <origin xyz="1.0714798190161185e-17 5.357399095080592e-18 0.04146146933144895" rpy="0 0 0"/>
+    <mass value="3.3316229023675548"/>
+    <inertia ixx="0.005513" iyy="0.009035" izz="0.005453" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.0 -0.27" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find robotic_description)/meshes/fourth_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.0 -0.27" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find robotic_description)/meshes/fourth_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Revolute 1" type="revolute">
+  <origin xyz="0.0 0.0 0.04" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="second_link_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+  <limit upper="6.283185" lower="0.0" effort="100" velocity="100"/>
+</joint>
+
+<joint name="Revolute 2" type="revolute">
+  <origin xyz="0.0 0.0 0.09" rpy="0 0 0"/>
+  <parent link="second_link_1"/>
+  <child link="third_link_1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+  <limit upper="1.570796" lower="-1.570796" effort="100" velocity="100"/>
+</joint>
+
+<joint name="Revolute 3" type="revolute">
+  <origin xyz="0.0 0.0 0.14" rpy="0 0 0"/>
+  <parent link="third_link_1"/>
+  <child link="fourth_link_1"/>
+  <axis xyz="1.0 0.0 0.0"/>
+  <limit upper="1.570796" lower="-1.570796" effort="100" velocity="100"/>
+</joint>
+
+</robot>
